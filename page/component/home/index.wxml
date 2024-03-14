@@ -1,0 +1,117 @@
+<!-- 导入所需的外部wxml文件 -->
+<import src="../../../utils/loading.wxml" />
+<import src="../../../utils/image.wxml" />
+<import src="../../../utils/pageplay.wxml" />
+
+<!-- 使用名为"pp"的模板，并传递数据到模板中 -->
+<template is="pp" data="{{music:music,playing:playing,playtype:playtype}}" />
+
+<!-- 定义具有两个选项卡的头部视图，并根据当前选项卡的状态添加相应的样式 -->
+<view id="header" class="tab">
+    <view class="tab-item  {{playlist.idx==tabidx?'tbi-cur':''}}" bindtap="switchtab" data-t="1">
+        <text class="tbi-text">歌单</text>
+    </view>
+    <view class="tab-item  {{sort.idx==tabidx?'tbi-cur':''}}" bindtap="switchtab" data-t="3">
+        <text class="tbi-text">排行榜</text>
+    </view>
+</view>
+
+<!-- 定义具有id为"main"的主要内容视图 -->
+<view id="main" class="page_pp">
+    <!-- 歌单内容 -->
+    <view class="tab_cnt" hidden="{{tabidx!=1}}">
+        <view class='listheader' id="plc_header">{{catelist.checked.name}}
+            <text bindtap="togglePtype" id="catselectbtn">选择分类</text>
+        </view>
+        <block wx:if="{{playlist.loading}}">
+            <view class='flex-boxlist flex-two'>
+                <view class="tl_cnt cateplaylist" wx:for-items="{{playlist.list.playlists}}" wx:key="{{item.id}}">
+                    <navigator url="../playlist/index?pid={{item.id}}&from=toplist">
+                        <view class="cover">
+                            <image src="{{item.coverImgUrl}}?param=200y200" class="music_cover" />
+                            <view class="img_creator">
+                                <template is="image" data="{{src:'../../../image/cm2_icn_userhead@2x.png',width:24}}" /> {{item.creator.nickname}}
+                            </view>
+                            <view class="img_playcount">
+                                <image src="../../../image/p0.png" />{{item.playCount}}
+                            </view>
+                        </view>
+                        <text class="name">{{item.name}}</text>
+                    </navigator>
+                </view>
+            </view>
+        </block>
+        <template wx:if="{{!playlist.loading||playlist.list.more}}" is="loading" />
+    </view>
+
+    <!-- 排行榜内容 -->
+    <view class="tab_cnt" hidden="{{tabidx!=3}}">
+        <block wx:if="{{sort.loading}}">
+            <view class='listheader'>云音乐官方榜</view>
+            <view class='flex-boxlist flex sortlist'>
+                <navigator url="../playlist/index?pid={{item.id}}&from=toplist" wx:for-items="{{sort.list}}" wx:key="{{item.id}}" wx:if="{{item.ToplistType}}">
+                    <view class=" flexlist ">
+                        <view class="cover flexleft fl-image">
+                            <image class="album_cover" src="{{item.coverImgUrl}}?param=200y200" />
+                            <text>{{item.updateFrequency}}</text>
+                        </view>
+                        <view class="flexlist tl_info">
+                            <view class="sort_fl_list " wx:for-items="{{item.tracks}}" wx:for-item="r" wx:for-index="idx">
+                                {{idx+1}}．{{r.first}} - {{r.second}}
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <navigator url="../artists/top/index">
+                    <view class=" flexlist ">
+                        <view class="cover flexleft">
+                            <image class="album_cover" src="{{sort.artistToplist.coverUrl}}" />
+                        </view>
+                        <view class="flexlist tl_info">
+                            <view class="sort_fl_list " wx:for-items="{{sort.artistToplist.artists}}" wx:for-index="idx">
+                                {{idx+1}}．{{item.first}} -
+                                <text>{{item.third}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view class='listheader'>全球榜</view>
+            <view class='flex-boxlist'>
+                <view class="tl_cnt" wx:for-items="{{sort.list}}" wx:key="{{item.id}}" wx:if="{{!item.ToplistType}}">
+                    <navigator url="../playlist/index?pid={{item.id}}&from=toplist">
+                        <view class="cover flexleft">
+                            <image src="{{item.coverImgUrl}}?param=200y200" class="album_cover" />
+                            <text>{{item.updateFrequency}}</text>
+                        </view>
+                        <text>{{item.name}}</text>
+                    </navigator>
+                </view>
+            </view>
+        </block>
+        <template wx:else is="loading" />
+    </view>
+
+</view>
+
+<!-- 定义一个滚动视图，用于显示分类列表内容 -->
+<scroll-view style="height:100%" id="catewrap" scroll-into-view="c2" scroll-y="true" hidden="{{!cateisShow}}">
+    <view class="close" bindtap="togglePtype" id="closecatelist"></view>
+    <view id="cateall" data-catype="{{catelist.res.all}}" bindtap="cateselect" class="cl_list {{catelist.checked.name==catelist.res.all.name?'checked':''}}">
+        <text class="cl_ico_checked cl_ico" wx:if="{{catelist.checked.name==catelist.res.all.name}}"></text>{{catelist.res.all.name}}
+    </view>
+    <view class="catelist" id="c{{idx}}" wx:key="{{item}}" wx:for-items="{{catelist.res.categories}}" wx:for-index="idx">
+        <view class="cl_list cl_ico">
+            <image src="../../../image/cm2_discover_icn_{{idx}}@2x.png"></image>
+            <text>{{item}}</text>
+        </view>
+        <view class="cl_list {{catelist.checked.name==re.name?'checked':''}} " wx:if="{{re.category==idx}}" bindtap="cateselect" data-catype="{{re}}" data-catname="{{re.name}}" wx:for-items="{{catelist.res.sub}}" wx:key="{{item.name}}" wx:for-item="re">
+            <text class="cl_ico_hot cl_ico" wx:if="{{re.hot}}"></text>
+            <text class="cl_ico_checked cl_ico" wx:if="{{catelist.checked.name==re.name}}"></text>
+            {{re.name}}
+        </view>
+    </view>
+
+
+    
+</scroll-view>

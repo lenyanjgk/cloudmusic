@@ -1,0 +1,48 @@
+<!--音乐专辑详细信息和播放列表的页面。页面中包括了专辑封面、歌手信息、发行时间、操作按钮（如收藏、评论、分享）、播放全部按钮以及歌曲列表等内容。这个页面主要用来展示特定音乐专辑的详细信息和提供播放功能。-->
+
+<import src="../../../utils/playlist.wxml" /> <!-- 导入 playlist.wxml 模板 -->
+<import src="../../../utils/pageplay.wxml" /> <!-- 导入 pageplay.wxml 模板 -->
+<import src="../../../utils/loading.wxml" /> <!-- 导入 loading.wxml 模板 -->
+
+<template is="pp" data="{{music:music,playing:playing,playtype:playtype}}" /> <!-- 使用 pp 模板，并传递数据 music、playing、playtype -->
+
+<view id="plist-header"> <!-- 音乐播放列表头部信息 -->
+	<view class="music_cover blurbg" style="background-image:url({{result.album.picUrl}})" id="plh-filterbg"></view> <!-- 显示背景图片 -->
+	<image src="../../../image/a82.png" id="plh-cover-album" mode="aspectFill" /> <!-- 显示图片 -->
+	<image class="music_cover" mode="aspectFit" src="{{result.album.picUrl}}?param=200y200" /> <!-- 显示图片，限制尺寸为 200x200 像素 -->
+	<text id="music_h_name">{{result.album.name||""}}</text> <!-- 显示专辑名称 -->
+	<view data-userid="{{result.album.artist.id}}" bindtap="artlist"> <!-- 点击事件，显示歌手信息 -->
+		歌手：<text>{{result.album.artist.name}}</text>
+	</view>
+	<view> <!-- 显示发行时间 -->
+		发行时间：<text>{{result.album.publishTime}}</text>
+	</view>
+</view>
+
+<view id="plh_action"> <!-- 音乐专辑操作按钮区域 -->
+	<!-- 根据收藏状态显示不同的图片 -->
+	<image src="../../../image/cm2_list_detail_icn_fav_new@2x.png" wx:if="{{!list.album.info.liked}}" />
+	<image src="../../../image/cm2_list_detail_icn_faved@2x.png" wx:if="{{list.album.info.liked}}" />
+	<text>{{'收藏'}}</text> <!-- 显示收藏文本 -->
+	<navigator url="../recommend/index?id={{result.album.info.threadId}}&from=playlist"> <!-- 跳转链接，传递参数 id 和 from -->
+		<image src="../../../image/cm2_list_detail_icn_cmt@2x.png" /> <!-- 图片 -->
+		<text>{{result.album.info.commentCount||'评论'}}</text> <!-- 显示评论数 -->
+	</navigator>
+	<image src="../../../image/cm2_list_detail_icn_share@2x.png" /> <!-- 图片 -->
+	<text>{{result.album.info.shareCount||'分享'}}</text> <!-- 显示分享数 -->
+</view>
+
+<view class="plist-detail page_pp"> <!-- 音乐播放列表详细信息 -->
+	<block wx:if="{{result.songs.length}}"> <!-- 当音乐播放列表不为空时执行下面的内容 -->
+		<view id="playall" bindtap="playall" class="flexlist flex-center"> <!-- 播放全部按钮 -->
+			<view class="flexleft flexnum">
+				<image src="../../../image/pl-playall.png" mode="widthFix" /> <!-- 图片 -->
+			</view>
+			<view class="flexlist">
+				<text id="pa-count">播放全部 <text>(共{{result.songs.length}}首)</text></text> <!-- 显示播放全部文本和歌曲数量 -->
+			</view>
+		</view>
+		<template is="playlist" data="{{list:result.songs,curplay:curplay}}" /> <!-- 使用 playlist 模板，传递数据 list 和 curplay -->
+	</block>
+	<template is="loading" wx:else></template> <!-- 当音乐播放列表为空时显示加载中的提示 -->
+</view>

@@ -1,0 +1,40 @@
+<view class='listheader'>云音乐官方榜</view> <!-- 显示标题：云音乐官方榜 -->
+
+<view class='flex-boxlist'>
+    <!-- 使用flex布局 -->
+    <view class="tl_cnt" wx:for="{{toplist.toplist1}}">
+        <!-- 遍历toplist1列表 -->
+        <navigator url="../playlist/index?pid={{item.id}}&from=toplist">
+            <!-- 设置导航到歌单页面的链接 -->
+            <view class="cover">
+                <!-- 歌单封面部分 -->
+                <image class="music_cover" src="{{item.src}}" /> <!-- 显示歌单封面图片 -->
+                <text>{{item.updatetime}}</text> <!-- 显示歌单更新时间 -->
+            </view>
+            <view class="tl_info">
+                <!-- 歌单信息部分 -->
+                <view>
+                    <text>{{item.name}}</text> <!-- 显示歌单名称 -->
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>
+
+<view class='listheader'>全球榜</view> <!-- 显示标题：全球榜 -->
+
+<view class='flex-boxlist'>
+    <!-- 使用flex布局 -->
+    <view class="tl_cnt" wx:for="{{toplist.toplist2}}">
+        <!-- 遍历toplist2列表 -->
+        <navigator url="../playlist/index?pid={{item.id}}&from=toplist">
+            <!-- 设置导航到歌单页面的链接 -->
+            <view class="cover">
+                <!-- 歌单封面部分 -->
+                <image src="{{item.src}}" class="music_cover" /> <!-- 显示歌单封面图片 -->
+                <text>{{item.updatetime}}</text> <!-- 显示歌单更新时间 -->
+            </view>
+            <text>{{item.name}}</text> <!-- 显示歌单名称 -->
+        </navigator>
+    </view>
+</view>

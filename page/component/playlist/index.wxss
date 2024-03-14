@@ -1,0 +1,127 @@
+#plist-header {
+    position: relative;  /* 设置元素为相对定位，用于后续子元素的绝对定位 */
+    overflow: hidden;  /* 隐藏溢出的内容 */
+}
+
+#plh-main {
+    position: relative;  /* 设置元素为相对定位，用于后续子元素的绝对定位 */
+    z-index: 3;  /* 设置元素在层叠顺序中的优先级 */
+    overflow: hidden;  /* 隐藏溢出的内容 */
+}
+
+#plh-cover {
+    width: 280rpx;  /* 设置元素宽度 */
+    height: 280rpx;  /* 设置元素高度 */
+    float: left;  /* 元素左浮动 */
+    margin: 30rpx;  /* 设置元素外边距 */
+    position: relative;  /* 设置元素为相对定位，用于内部元素的绝对定位 */
+    margin-bottom: 10rpx;  /* 设置元素下外边距 */
+}
+
+#plh-cover image {
+    width: 100%;  /* 图片元素宽度占满父元素 */
+    height: 100%;  /* 图片元素高度占满父元素 */
+}
+
+.blurbg {
+    background-color: #eee;  /* 设置背景颜色 */
+}
+
+#plh-playinfo {
+    position: absolute;  /* 设置元素为绝对定位，相对于其最近的非 static 定位的父元素进行定位 */
+    z-index: 3;  /* 设置元素在层叠顺序中的优先级 */
+    right: 10rpx;  /* 设置元素右偏移量 */
+    bottom: 10rpx;  /* 设置元素下偏移量 */
+}
+
+#plh-playinfo image {
+    width: 46rpx;  /* 设置图片元素宽度 */
+    height: 46rpx;  /* 设置图片元素高度 */
+    vertical-align: top;  /* 设置图片元素垂直对齐方式为顶部对齐 */
+    background-color: rgba(0, 0, 0, .2);  /* 设置背景颜色 */
+    border-radius: 50%;  /* 设置边框圆角半径为50% */
+}
+
+#user_ava {
+    width: 60rpx;  /* 设置图片元素宽度 */
+    height: 60rpx;  /* 设置图片元素高度 */
+    border-radius: 50%;  /* 设置边框圆角半径为50% */
+    margin-right: 20rpx;  /* 设置右外边距 */
+    vertical-align: middle;  /* 设置垂直对齐方式为居中对齐 */
+}
+
+#plh-cnt {
+    margin-left: 280rpx;  /* 设置左外边距 */
+    color: #fff;  /* 设置文字颜色 */
+    font-size: 24rpx;  /* 设置文字字体大小 */
+    line-height: 50rpx;  /* 设置行高 */
+}
+
+#music_h_name {
+    font-size: 32rpx;  /* 设置文字字体大小 */
+    padding: 60rpx 20rpx 40rpx 0;  /* 设置内边距 */
+    display: block;  /* 设置元素为块级元素 */
+}
+
+#plh_action {
+    display: flex;  /* 设置弹性盒子布局 */
+    position: relative;  /* 设置元素为相对定位，用于后续子元素的绝对定位 */
+    z-index: 3;  /* 设置元素在层叠顺序中的优先级 */
+    clear: both;  /* 清除浮动 */
+    width: 100%;  /* 设置宽度占满父元素 */
+    line-height: 2;  /* 设置行高 */
+}
+
+#plh_action view {
+    text-align: center;  /* 设置文本居中对齐 */
+    color: #fff;  /* 设置文字颜色 */
+    border-bottom: none;  /* 移除下边框 */
+    font-size: 24rpx;  /* 设置文字字体大小 */
+    flex: 1;  /* 设置弹性盒子项目的伸缩比例 */
+}
+
+#plh_action view image {
+    width: 110rpx;  /* 设置图片元素宽度 */
+    height: 110rpx;  /* 设置图片元素高度 */
+    display: block;  /* 设置元素为块级元素 */
+    margin: 0 auto -30rpx;  /* 设置外边距及负下边距，用于调整位置 */
+}
+
+#plh_action view text {
+    display: block;  /* 设置元素为块级元素 */
+    padding-bottom: .5em;  /* 设置下内边距 */
+    line-height: 2;  /* 设置行高 */
+}
+
+.topindex {
+    color: red;  /* 设置文字颜色 */
+}
+
+.playingidx {
+    width: 38rpx;  /* 设置元素宽度 */
+    height: 38rpx;  /* 设置元素高度 */
+}
+
+.ftp {
+    display: block;  /* 设置元素为块级元素 */
+    color: #888;  /* 设置文字颜色 */
+    font-size: 18rpx;  /* 设置文字字体大小 */
+    padding-top: 10rpx;  /* 设置上内边距 */
+}
+
+.ftp image {
+    width: 18rpx;  /* 设置图片元素宽度 */
+    display: inline-block;  /* 设置元素为内联块级元素 */
+    vertical-align: middle;  /* 设置垂直对齐方式为居中对齐 */
+    overflow: hidden;  /* 隐藏溢出的内容 */
+    margin-right: 5rpx;  /* 设置右外边距 */
+}
+
+.ftp image.tpnew {
+    width: 38rpx;  /* 设置图片元素宽度 */
+}
+
+.pld-mv image {
+    width: 78rpx;  /* 设置图片元素宽度 */
+    height: 63rpx;  /* 设置图片元素高度 */
+}

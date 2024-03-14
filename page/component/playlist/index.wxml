@@ -1,0 +1,51 @@
+<import src="../../../utils/playlist.wxml" /> <!-- 引入歌单列表组件 -->
+<import src="../../../utils/pageplay.wxml" /> <!-- 引入播放器组件 -->
+
+<template is="pp" data="{{music:music,playing:playing,playtype:playtype}}" /> <!-- 使用播放器组件并传递相关数据 -->
+
+<view id="plist-header"> <!-- 歌单头部 -->
+    <view class="blurbg" style="background-image:url({{cover}})" id="plh-filterbg"></view> <!-- 背景图片 -->
+    <view id="plh-main">
+        <view id="plh-cover">
+            <image class="music_cover" src="{{cover}}" /> <!-- 封面图片 -->
+            <view class="img_playcount">
+                <image src="../../../image/p0.png" style="width:24rpx;height:24rpx;" />{{list.playlist.playCount}} <!-- 播放次数 -->
+            </view>
+            <view id="plh-playinfo" bindtap="plinfo">
+                <image src="../../../image/cm2_list_detail_icn_infor@2x.png" /> <!-- 查看歌单详情按钮 -->
+            </view>
+        </view>
+        <view id="plh-cnt">
+            <text id="music_h_name">{{list.playlist.name||" "}}</text> <!-- 歌单名称 -->
+            <view data-userid="{{list.playlist.creator.userId}}" wx:if="{{list}}" bindtap="userplaylist"> <!-- 创建者信息 -->
+                <image id="user_ava" class="user_avator" src="{{list.playlist.creator.avatarUrl}}" /> <!-- 创建者头像 -->
+                <text>{{list.playlist.creator.nickname||" "}} </text> <!-- 创建者昵称 -->
+                <image src="../../../image/cm2_list_detail_icn_arr@2x.png" style="width:16rpx;height:24rpx;" /> <!-- 查看用户歌单按钮 -->
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="plist-detail page_pp"> <!-- 歌单详情 -->
+    <block wx:if="{{list.playlist.tracks.length}}">
+        <view id="playall" bindtap="playall" class="flexlist flex-center"> <!-- 播放全部按钮 -->
+            <view class="flexleft flexnum">
+                <image src="../../../image/pl-playall.png" mode="widthFix" /> <!-- 播放全部图标 -->
+            </view>
+            <view class="flexlist">
+                <text id="pa-count">播放全部 <text> (共{{list.playlist.trackCount}}首)</text> <!-- 播放全部文本及歌曲数量 -->
+                </text>
+            </view>
+        </view>
+        <template is="playlist" data="{{list:list.playlist.tracks,privileges:list.privileges,curplay:curplay}}" /> <!-- 使用歌单列表组件并传递相关数据 -->
+    </block>
+    <block wx:if="{{!list.playlist.tracks.length}}">
+        <view class="cntloading">加载中... <!-- 加载中提示 -->
+            <view>
+                <text class="cl1"></text>
+                <text class="cl2"></text>
+                <text class="cl3"></text>
+            </view>
+        </view>
+    </block>
+</view>

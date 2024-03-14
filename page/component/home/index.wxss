@@ -1,0 +1,226 @@
+/* 固定定位的页头 */
+#header {
+    position: fixed; /* 位置固定 */
+    top: 0; /* 顶部距离为0 */
+    width: 100%; /* 宽度100% */
+    z-index: 10; /* 层级为10 */
+    -webkit-backdrop-filter: blur(15px); /* Safari浏览器的背景模糊效果 */
+    backdrop-filter: blur(15px); /* Chrome浏览器的背景模糊效果 */
+}
+
+/* 上次搜索记录样式 */
+#lastsearch {
+    line-height: 1; /* 行高为1 */
+    padding-top: 20rpx; /* 顶部内边距为20rpx */
+    flex: 0 0 80rpx; /* 不伸缩，初始大小80rpx */
+}
+
+/* 轮播图样式 */
+swiper,
+swiper image {
+    width: 750rpx; /* 宽度750rpx */
+    height: 290rpx; /* 高度290rpx */
+}
+
+/* 主要内容区域样式 */
+#main {
+    min-height: 1200rpx; /* 最小高度为1200rpx */
+    padding-top: 80rpx; /* 顶部内边距为80rpx */
+}
+
+/* 推荐导航样式 */
+#rec_nav {
+    display: flex; /* 使用flex布局 */
+    text-align: center; /* 文本居中 */
+    width: 100%; /* 宽度100% */
+    border-bottom: 1rpx solid #eee; /* 底部边框为1rpx实线，颜色为#eee */
+}
+
+#rec_nav view {
+    flex: 1; /* 占据剩余空间 */
+    position: relative; /* 相对定位 */
+}
+
+#rec_nav navigator {
+    padding: 25rpx 0; /* 上下内边距为25rpx，左右内边距为0 */
+    font-size: 26rpx; /* 字体大小为26rpx */
+}
+
+/* 推荐图标样式 */
+.recn_ico {
+    width: 110rpx; /* 宽度110rpx */
+    height: 110rpx; /* 高度110rpx */
+    line-height: 110rpx; /* 行高110rpx */
+    font-size: 56rpx; /* 字体大小56rpx */
+    color: #BB2C08; /* 颜色为#BB2C08 */
+    border: 1rpx solid #BB2C08; /* 边框为1rpx实线，颜色为#BB2C08 */
+    border-radius: 50%; /* 圆角半径为50% */
+    margin: 0 auto 20rpx; /* 外边距上下为0，左右居中，下方20rpx外边距 */
+    font-weight: 300; /* 字重为300 */
+}
+
+.recn_ico image {
+    width: 110rpx; /* 图片宽度110rpx */
+    height: 110rpx; /* 图片高度110rpx */
+}
+
+/* 主页内容样式 */
+.homepl .tl_cnt {
+    width: 168.75rpx; /* 宽度168.75rpx */
+}
+
+/* 相册加载样式 */
+#album_loading {
+    text-align: center; /* 文本居中 */
+    margin: 120rpx auto 0; /* 外边距上为120rpx，下自动调整，左右居中 */
+    color: #999; /* 颜色为#999 */
+    font-size: 28rpx; /* 字体大小为28rpx */
+}
+
+#album_loading image {
+    width: 88rpx; /* 图片宽度为88rpx */
+    height: 88rpx; /* 图片高度为88rpx */
+    animation: circle infinite 1.5s linear; /* 动画效果-无限循环，持续1.5秒，线性变化 */
+    display: block; /* 块级元素显示 */
+    margin: 40rpx auto; /* 外边距上为40rpx，左右居中 */
+    border-radius: 50%; /* 边框圆角半径为50% */
+    border: 1rpx solid #999; /* 边框为1rpx实线，颜色为#999 */
+}
+
+/* 分类容器样式 */
+#catewrap {
+    padding: 0 15rpx; /* 上下内边距为0，左右内边距为15rpx */
+    box-sizing: border-box; /* 盒模型为border-box */
+    position: fixed; /* 位置固定 */
+    width: 100%; /* 宽度100% */
+    height: 100%; /* 高度100% */
+    z-index: 100; /* 层级为100 */
+    left: 0; /* 左侧距离为0 */
+    top: 0; /* 顶部距离为0 */
+    background-color: #fff; /* 背景颜色为白色 */
+}
+
+#closecatelist {
+    margin: 15rpx auto; /* 外边距上为15rpx，下自动调整，左右居中 */
+}
+
+.catelist {
+    margin-bottom: 20rpx; /* 下方外边距为20rpx */
+    overflow: hidden; /* 溢出隐藏 */
+    padding-bottom: 2rpx; /* 底部内边距为2rpx */
+}
+
+.cl_list {
+    width: 179rpx; /* 宽度179rpx */
+    border: 1rpx solid #eee; /* 边框为1rpx实线，颜色为#eee */
+    text-align: center; /* 文本居中 */
+    height: 90rpx; /* 高度90rpx */
+    font-size: 26rpx; /* 字体大小为26rpx */
+    line-height: 90rpx; /* 行高为90rpx */
+    overflow: hidden; /* 溢出隐藏 */
+    position: relative; /* 相对定位 */
+    z-index: 1; /* 层级为1 */
+    margin: 0 -1rpx -1rpx 0; /* 外边距上为0，右为-1rpx，下为-1rpx，左为0 */
+    float: left; /* 左浮动 */
+}
+
+.cl_ico {
+    height: 182rpx; /* 高度182rpx */
+    line-height: 1; /* 行高为1 */
+}
+
+.cl_ico image {
+    width: 80rpx; /* 图片宽度为80rpx */
+    height: 80rpx; /* 图片高度为80rpx */
+    margin: 35rpx auto 15rpx; /* 外边距上为35rpx，左右居中，下为15rpx */
+    display: block; /* 块级元素显示 */
+}
+
+#cateall {
+    float: none; /* 取消浮动 */
+    width: auto; /* 宽度为自适应 */
+    margin: 20rpx auto; /* 外边距上为20rpx，左右居中 */
+}
+
+.cl_ico_checked,
+.cl_ico_hot {
+    content: ""; /* 伪元素内容为空 */
+    position: absolute; /* 绝对定位 */
+}
+
+.cl_ico_hot {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAABTVBMVEXTOjHTOjHT...); /* 热门图标Base64编码 */
+    width: 56rpx; /* 宽度56rpx */
+    height: 56rpx; /* 高度56rpx */
+    left: 0; /* 左侧距离为0 */
+    top: 0; /* 顶部距离为0 */
+    background-size: 100% 100%; /* 背景大小为100% */
+}
+
+.cl_ico_checked {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAApVBMVEXTOjHTOjHT...); /* 选中图标Base64编码 */
+    width: 38rpx; /* 宽度38rpx */
+    height: 38rpx; /* 高度38rpx */
+    background-position: right bottom; /* 背景定位为右下 */
+    right: 0; /* 右侧距离为0 */
+    bottom: 0; /* 底部距离为0 */
+    background-size: 48rpx 48rpx; /* 背景大小为48rpx */
+}
+
+.checked {
+    border-color: #BB2C08; /* 边框颜色为#BB2C08 */
+    z-index: 2; /* 层级为2 */
+}
+
+#catselectbtn {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACecocUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACdQTFRFiIiI+/z9vr6/xcXGnJyd9PX28/T1n5+fnp6ejIyMm5ub7e7v3t/gBUeqYAAAAEBJREFUeNpiYAABZgYI4GZj42LmYmPjBrJZGRlZmFkYGVnR2Bzs7JzMnOzsHAwMTCDAAyZRxHHqRTYfYS9AgAEAaTABl1/qO3QAAAAASUVORK5CYII=); /* 按钮背景图片Base64编码 */
+    border: 1rpx solid #eee; /* 边框为1rpx实线，颜色为#eee */
+    color: #999; /* 颜色为#999 */
+    font-size: 24rpx; /* 字体大小为24rpx */
+    padding: 8rpx 20rpx 8rpx 40rpx; /* 上右下左内边距分别为8rpx、20rpx、8rpx、40rpx */
+    background-position: 10rpx center; /* 背景定位为10rpx居中 */
+    float: right; /* 右浮动 */
+    background-repeat: no-repeat; /* 背景不重复 */
+    border-radius: 3rpx; /* 边框圆角半径为3rpx */
+}
+
+#plc_header {
+    border: none; /* 没有边框 */
+}
+
+.djcatewrap {
+    display: flex; /* 使用flex布局 */
+    flex-direction: row; /* 主轴方向为行 */
+    flex-wrap: wrap; /* 换行显示 */
+}
+
+.djcatelist {
+    text-align: center; /* 文本居中 */
+    font-size: 24rpx; /* 字体大小为24rpx */
+    flex: 0 0 187.5rpx; /* 不伸缩，初始大小187.5rpx */
+    height: 145rpx; /* 高度145rpx */
+}
+
+.djcatelist image {
+    width: 80rpx; /* 图片宽度为80rpx */
+    height: 80rpx; /* 图片高度为80rpx */
+    margin-top: 20rpx; /* 外边距上为20rpx */
+}
+
+.flexlist .cover {
+    width: 230rpx; /* 宽度230rpx */
+    height: 230rpx; /* 高度230rpx */
+    padding: 0; /* 内边距为0 */
+    flex: 0 0 230rpx; /* 不伸缩，初始大小230rpx */
+    margin: 10rpx 20rpx 10rpx 10rpx; /* 外边距上为10rpx，右为20rpx，下为10rpx，左为10rpx */
+}
+
+.sort_fl_list {
+    flex: 0 0 100%; /* 不伸缩，初始大小100% */
+    line-height: 2; /* 行高为2 */
+}
+
+.sortlist .flexlist {
+    flex-flow: wrap; /* 换行显示 */
+    align-content: center; /* 对齐方式为居中 */
+}

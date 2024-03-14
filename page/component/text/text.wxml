@@ -1,0 +1,119 @@
+<!-- 导入所需的外部wxml文件 -->
+<import src="../../../utils/pageplay.wxml" />
+
+<!-- 使用名为"pp"的模板，并传递数据到模板中 -->
+<template is="pp" data="{{music:music,playing:playing,playtype:playtype}}" />
+
+<!-- 定义具有两个选项卡的头部视图，并根据当前选项卡的状态添加相应的样式 -->
+<view id="header" class="tab">
+  <view class="tab-item  {{playlist.idx==tabidx?'tbi-cur':''}}" bindtap="switchtab" data-t="1">
+    <text class="tbi-text">计时</text>
+  </view>
+  <view class="tab-item  {{sort.idx==tabidx?'tbi-cur':''}}" bindtap="switchtab" data-t="2">
+    <text class="tbi-text">运动记录</text>
+  </view>
+  <view class="tab-item  {{sort.idx==tabidx?'tbi-cur':''}}" bindtap="switchtab" data-t="3">
+    <text class="tbi-text">运动时间设置</text>
+  </view>
+</view>
+
+<view id="main" class="page_pp">
+  <!-- 计时 -->
+  <view class="tab_cnt" hidden="{{tabidx!=1}}">
+    <view class="container timer {{isRuning ? 'timer--runing': ''}}">
+      <view class="timer_main">
+        <view class="timer_time-wrap">
+          <view class="timer_progress_mask"></view>
+          <view class="timer_progress timer_left">
+            <view class="timer_circle timer_circle--left" style="transform: rotate({{leftDeg}}deg);"></view>
+          </view>
+          <view class="timer_progress timer_right">
+            <view class="timer_circle timer_circle--right" style="transform: rotate({{rightDeg}}deg);"></view>
+          </view>
+          <text wx:if="{{!completed}}" class="timer_time">{{remainTimeText}}</text>
+
+
+          <text wx:if="{{isRuning}}" animation="{{nameAnimation}}" class="timer_taskName">{{taskName}}{{completed ? '已完成！' : '中'}}</text>
+          <image wx:if="{{completed}}" class="timer_done" src="../../image/complete.png"></image>
+        </view>
+        <input type="text" placeholder-style="text-align:center" class="timer_inputname" bindinput="changeLogName" placeholder="您的本次运动类型" />
+      </view>
+
+      <view class="timer_footer">
+        <view bindtap="startTimer" data-type="work" class="timer_ctrl {{isRuning && timerType == 'rest' ? 'hide' : ''}}">{{isRuning ? '完成': '工作'}}</view>
+
+        <view bindtap="startTimer" data-type="rest" class="timer_ctrl {{isRuning && timerType == 'work' ? 'hide' : ''}}">{{isRuning ? '完成': '休息'}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 运动记录 -->
+  <view class="tab_cnt" hidden="{{tabidx!=2}}">
+    <block wx:if="{{logs.length}}">
+      <scroll-view class="container" scroll-y="true">
+        <view class="log panel">
+          <view class="log_item" wx:for="{{logs}}" wx:for-index="$index" wx:for-item="log">
+            <text class="log_start">{{log.startTime}}</text>
+            <text class="log_action">{{log.action}}</text>
+            <text class="log_action">{{log.name}}</text>
+          </view>
+        </view>
+
+      </scroll-view>
+      <view class="clear">
+        <button bindtap="switchModal" class="clear_btn" size="mini">清除记录</button>
+      </view>
+      <modal title="提示" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" bindconfirm="clearLog" bindcancel="switchModal">
+        是否清除记录？此操作不可恢复!
+      </modal>
+    </block>
+    <block wx:else>
+      <view class="nodata">
+        <image class="nodata_img" src="../../image/nodata.png"></image>
+        <text class="nodata_text">暂无记录</text>
+      </view>
+    </block>
+    <!-- <toast hidden="{{toastHidden}}" bindchange="hideToast">清除成功！</toast> -->
+
+  </view>
+
+  <!-- 运动时间设置-->
+  <view class="tab_cnt" hidden="{{tabidx!=3}}">
+    <view class="container">
+      <view class="section panel">
+        <text class="section_title">本次运动时长(分钟)</text>
+        <view class="section_body">
+          <slider bindchange="changeWorkTime" show-value="true" min="1" max="60" value="{{workTime}}" left-icon="cancel" right-icon="success_no_circle" />
+        </view>
+      </view>
+
+      <view class="section panel">
+        <text class="section_title">本次休息时长(分钟)</text>
+        <view class="section_body">
+          <slider bindchange="changeRestTime" show-value="true" min="5" max="60" value="{{restTime}}" left-icon="cancel" right-icon="success_no_circle" />
+        </view>
+      </view>
+
+      <view class="section panel">
+        <view class="section_title">
+          <text>主页背景</text>
+        </view>
+        <view class="section_body">
+          <text bindtab="" class="section_tip">选择背景 > </text>
+        </view>
+      </view>
+
+      <view class="section panel">
+        <view class="section_title">
+          <switch class="section_check" type="checkbox" size="mini" checked bindchange="switch1Change" />
+          <text>启用铃声</text>
+        </view>
+        <view class="section_body">
+          <text bindtab="" class="section_tip">选择铃声 > </text>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+</view>
+
