@@ -43,7 +43,7 @@ bashCopy codecloudmusic/
 
 ## 贡献者
 
-- 你的名字
+- jgk、hfy、lyh
 
 ## 许可证
 
